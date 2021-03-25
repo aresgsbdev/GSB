@@ -48,9 +48,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
             // encode the plain password
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
@@ -58,6 +55,8 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
         }
@@ -71,7 +70,7 @@ class UserController extends AbstractController
      /**
      * @Route("/contact_new", name="contact_new", methods={"GET","POST"})
      */
-    public function contact_new(Request $request): Response
+    public function contact_new(Request $request, EntityManagerInterface $em): Response
     {
         $user = new User();
         $form = $this->createForm(ContactType::class, $user);
@@ -79,16 +78,19 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // encode the plain password
-            $user->setPassword(
+             // encode the plain password
+             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
                     $form->get('password')->getData()
                 )
             );
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $messaging = new Messaging();
+            $messaging->setDestinationUser($em->getRepository(User::class)->find(1));
+            $messaging->setSenderUser($user);
 
             return $this->redirectToRoute('app_login');
         }
