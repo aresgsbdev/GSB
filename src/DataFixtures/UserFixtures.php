@@ -22,7 +22,7 @@ class UserFixtures extends Fixture
 
 		$superAdmin = new User();
 		
-		$superAdmin->setRoles(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_COMPTABLE', 'ROLE_USER']);
+		$superAdmin->setRoles(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_COMPTABLE', 'ROLE_COMMERCIALE', 'ROLE_USER']);
 		$superAdmin->setEmail('superAdmin@superAdmin.fr');
 		$superAdmin->setLastName('superAdmin');
 		$superAdmin->setFirstName('superAdmin');
@@ -39,7 +39,7 @@ class UserFixtures extends Fixture
 
 		$admin = new User();
 		
-		$admin->setRoles(['ROLE_ADMIN', 'ROLE_COMPTABLE', 'ROLE_USER']);
+		$admin->setRoles(['ROLE_ADMIN', 'ROLE_COMPTABLE', 'ROLE_COMMERCIALE', 'ROLE_USER']);
 		$admin->setEmail('admin@admin.fr');
 		$admin->setLastName('admin');
 		$admin->setFirstName('admin');
@@ -69,6 +69,23 @@ class UserFixtures extends Fixture
 		$comptable->setPassword($this->passwordEncoder->encodePassword(
 			$comptable,
 			'comptable'
+		));
+
+		$commerciale = new User();
+		
+		$commerciale->setRoles(['ROLE_COMMERCIALE']);
+		$commerciale->setEmail('commerciale@commerciale.fr');
+		$commerciale->setLastName('commerciale');
+		$commerciale->setFirstName('commerciale');
+		$commerciale->setAddress('404ruedescommerciale');
+		$commerciale->setCity('commerciale');
+		$commerciale->setPostalCode('42720');
+		$commerciale->setHireDate(new DateTime());
+		$commerciale->setRegistrationNumber('0123456789');
+		$commerciale->setPhone('0123456789');
+		$commerciale->setPassword($this->passwordEncoder->encodePassword(
+			$commerciale,
+			'commerciale'
 		));
 
 		$user = new User();

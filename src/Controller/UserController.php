@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Form\ContactType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,6 +92,15 @@ class UserController extends AbstractController
             $messaging = new Messaging();
             $messaging->setDestinationUser($em->getRepository(User::class)->find(1));
             $messaging->setSenderUser($user);
+            $messaging->setState(0);
+            $messaging->setArchives(0);
+            $messaging->setObject("Demande d'un accès au site.");
+            $messaging->setMessage("Demande pour " . $user->getLastName()." " . $user->getFirstName());
+            $messaging->setMessageDate(new DateTime());
+            $messaging->setMailUser($em->getRepository(User::class)->find(1));
+
+            $entityManager->persist($messaging);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_login');
         }

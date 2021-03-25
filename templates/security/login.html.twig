@@ -47,11 +47,7 @@
 			
 			    <center>
 			
-			
-			
-			    
-			    
-			    {% if error %}
+			{% if error %}
 			        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			    {% endif %}
 			
@@ -59,25 +55,17 @@
 			        
 			        <div class="row justify-content-center">
 			        
-			    
-			            
 			            <br>
 			                
 			                <div class="card" style="width: 40rem;">
 			                    <div class="card-body p-3 mt-3">
 			
-			                    
-			                   
 			                            <img class="col-xl-10 col-lg-12 col-md-9" style="width: 18rem;" src="https://sites.google.com/site/portfolioclementparent/_/rsrc/1394810844515/mon-carnet-de-bord/travaux-et-projets/projet-gsb/logo.png">
-			                            
 			                            
 			                        <!-- Nested Row within Card Body -->
 			                        <div class="row">
-			                            
-			                            
+			                             
 			                            <div class="col-lg-8">
-			                            
-			
 			                            
 			                                <div class="p-5">
 			                                    <div class="">
@@ -85,7 +73,6 @@
 			                                    <div class="center-block"> 
 			                                        <h1 class="h4 text-gray-900 mb-4 container h-100">Connexion</h1>
 			                                        </div>
-			                                        
 			                                        
 			                                    </div>
 			                                    <form class="user">
@@ -108,9 +95,6 @@
 			                                        </div> #}
 
 	{# <button type="submit" name="login" class="btn btn-primary">Se connecter</button>
-			
-			                                        
-			                                    
 			                                        
 			                                        {# <hr>
 			                                        <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -150,7 +134,6 @@
 				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
 		{% endif %}
-
 
 		<center>
 			<br></br>
